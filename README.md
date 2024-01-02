@@ -5,7 +5,7 @@ Thats why user have 10 tries instead of 5.
 
 If u wanna run it, download files place them in same dir.
 
--**RUN**
+**RUN**
 ```
 python3 wordle.py 
 ```
