@@ -1,13 +1,11 @@
-#This is wordle game, but not like every other it doesnt tell you if the letter you found is on right place. 
-#Thats why user have 10 tries instead of 5.
+#This is wordle game.
+
 
 import random
 
-#Declaration
-words =[]
-file = open("words.txt","r")
-content=file.read()
-letters=[]
+
+#Initialization
+words = []
 keyword = ""
 i=0
 file = open("words.txt","r")
@@ -16,29 +14,39 @@ file = open("words.txt","r")
 for f in file.readlines():
     words+=[i for i in f.split(" ")]
     
+
 keyword = random.choice(words)
+#All the words in my file are already in lowercase. However, I included this precaution in case someone uses a different file or if i add more content.
 keyword = keyword.lower()
 
-#Main wordle game
-while(i<10):
-    YourWord = input("Enter your word: ")
-    YourWord = YourWord.lower()
-    if YourWord in content:
-        if(input==keyword):
-            print("Nice u found the right word")
+print("Wordle is a word puzzle game where players have six attempts to guess a five-letter word, receiving feedback on which letters are correct and in the right position.")
+print("Have fun")
+
+def word_check():
+    pokusaji = 6
+    
+    while(pokusaji > 0):
+        pogodi = str(input("Guess word:"))
+        if(pogodi == keyword):
+            print("WOOHOOOO. You guessed correctly.")
             break
         else:
-            for leta in YourWord:
-                for letb in keyword:
-                    if(leta == letb):
-                        letters+=leta
-                        letters = list(dict.fromkeys(letters))
-    else:
-        print("Your word doesnt exist try again")
-        i=i-1
-    
-    print(letters)
-    
-    i=i+1
+            pokusaji = pokusaji - 1
+            print(f"You have {pokusaji} attempts left \n")
 
-print("Done. Keyword is " + keyword)    
+            for i,j in zip(keyword,pogodi):
+                if j in keyword and j in i:
+                    print(j + " right place")
+                elif j in keyword:
+                    print(j + " wrong place")
+                else:
+                    print("X")    
+
+        if pokusaji == 0:
+            print("You lost")
+            print("Solution is " + keyword)
+                
+
+
+
+word_check()            
